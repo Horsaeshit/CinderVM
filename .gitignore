@@ -1,0 +1,24 @@
+# Rust build artifacts
+/target
+
+# Cargo.lock is committed on purpose: cindervm ships binaries, and a locked
+# toolchain is part of reproducible agent execution.
+# (see https://doc.rust-lang.org/cargo/faq.html#why-have-cargolock-in-version-control)
+
+# Generated artifacts: bytecode images, journals, snapshots
+corpus/*.cdxb
+*.cdxc
+*.jl
+
+# Go build artifacts (supervisor)
+/cmd/cinderd/cinderd
+/cinderd
+
+# Editor and OS junk
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
