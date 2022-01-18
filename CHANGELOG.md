@@ -38,3 +38,5 @@
 - fuzz stabilize dispatch loop
 
 - verifier polish checksum path
+
+- fuzz fix arena alignment
