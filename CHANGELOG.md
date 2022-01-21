@@ -28,15 +28,3 @@
 - isa tune replay host
 
 - ctx simplify pending discipline
-
-- journal document pending discipline
-
-- docs prepare label resolution
-
-- cli stabilize pending discipline
-
-- fuzz stabilize dispatch loop
-
-- verifier polish checksum path
-
-- fuzz fix arena alignment
