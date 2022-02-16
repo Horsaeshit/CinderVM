@@ -110,11 +110,3 @@
 - ctx rework disassembler
 
 - interp refactor image sealing
-
-- disasm document dispatch loop
-
-- budget fix image sealing
-
-- ctx tighten journal chain
-
-- replay wire up opcode table
