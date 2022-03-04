@@ -54,3 +54,27 @@
 - docs add journal chain
 
 - cli polish pending discipline
+
+- core add dispatch loop
+
+- isa wire up type lattice
+
+- journal document opcode table
+
+- docs clarify lexer spans
+
+- wire document dispatch loop
+
+- verifier simplify disassembler
+
+- wire clean up wire framing
+
+- snapshot tighten wire framing
+
+- snapshot rework fuzz harness
+
+- tests refactor opcode table
+
+- fuzz add exit codes
+
+- budget clean up replay host
