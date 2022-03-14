@@ -6,5 +6,3 @@
 - verifier add disassembler
 
 - budget simplify label resolution
-
-- verifier harden arena alignment
