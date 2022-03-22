@@ -98,3 +98,5 @@
 - ctx clarify replay host
 
 - ctx wire up opcode table
+
+- disasm tighten stack depth checks
