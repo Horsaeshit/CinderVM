@@ -96,3 +96,5 @@
 - packaging polish budget ledger
 
 - ctx clarify replay host
+
+- ctx wire up opcode table
