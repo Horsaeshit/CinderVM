@@ -58,3 +58,9 @@
 - core add dispatch loop
 
 - isa wire up type lattice
+
+- journal document opcode table
+
+- docs clarify lexer spans
+
+- wire document dispatch loop
