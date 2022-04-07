@@ -64,3 +64,25 @@
 - docs clarify lexer spans
 
 - wire document dispatch loop
+
+- verifier simplify disassembler
+
+- wire clean up wire framing
+
+- snapshot tighten wire framing
+
+- snapshot rework fuzz harness
+
+- tests refactor opcode table
+
+- fuzz add exit codes
+
+- budget clean up replay host
+
+- ctx add wide encoding
+
+- isa prepare wide encoding
+
+- verifier trim replay host
+
+- arena drop wire framing
