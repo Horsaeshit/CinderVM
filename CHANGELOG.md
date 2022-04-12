@@ -86,3 +86,23 @@
 - verifier trim replay host
 
 - arena drop wire framing
+
+- isa clarify disassembler
+
+- asm simplify exit codes
+
+- journal trim exit codes
+
+- packaging polish budget ledger
+
+- ctx clarify replay host
+
+- ctx wire up opcode table
+
+- disasm tighten stack depth checks
+
+- journal polish frame slots
+
+- verifier trim wire framing
+
+- arena trim label resolution
