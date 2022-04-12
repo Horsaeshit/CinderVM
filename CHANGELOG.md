@@ -104,5 +104,3 @@
 - journal polish frame slots
 
 - verifier trim wire framing
-
-- arena trim label resolution
