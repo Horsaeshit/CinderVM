@@ -48,5 +48,3 @@
 - cli fix frame slots
 
 - docs harden stack depth checks
-
-- snapshot fix lexer spans
