@@ -114,5 +114,3 @@
 - disasm document dispatch loop
 
 - budget fix image sealing
-
-- ctx tighten journal chain
