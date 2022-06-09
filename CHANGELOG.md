@@ -16,3 +16,19 @@
 - lexer trim abstract interpretation
 
 - journal extend wire framing
+
+- wire rework dispatch loop
+
+- interp harden replay host
+
+- wire prepare type lattice
+
+- cli fix fuzz harness
+
+- isa tune replay host
+
+- ctx simplify pending discipline
+
+- journal document pending discipline
+
+- docs prepare label resolution
