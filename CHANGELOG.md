@@ -32,3 +32,5 @@
 - journal document pending discipline
 
 - docs prepare label resolution
+
+- cli stabilize pending discipline
