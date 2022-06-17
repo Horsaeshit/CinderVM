@@ -34,3 +34,13 @@
 - docs prepare label resolution
 
 - cli stabilize pending discipline
+
+- fuzz stabilize dispatch loop
+
+- verifier polish checksum path
+
+- fuzz fix arena alignment
+
+- budget trim journal chain
+
+- docs fix lexer spans
