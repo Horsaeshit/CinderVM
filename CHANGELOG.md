@@ -44,3 +44,5 @@
 - budget trim journal chain
 
 - docs fix lexer spans
+
+- cli fix frame slots
