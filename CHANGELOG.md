@@ -82,5 +82,3 @@
 - ctx add wide encoding
 
 - isa prepare wide encoding
-
-- verifier trim replay host
