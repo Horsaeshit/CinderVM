@@ -80,3 +80,17 @@
 - budget clean up replay host
 
 - ctx add wide encoding
+
+- isa prepare wide encoding
+
+- verifier trim replay host
+
+- arena drop wire framing
+
+- isa clarify disassembler
+
+- asm simplify exit codes
+
+- journal trim exit codes
+
+- packaging polish budget ledger
