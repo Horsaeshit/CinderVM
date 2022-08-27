@@ -68,3 +68,5 @@
 - verifier simplify disassembler
 
 - wire clean up wire framing
+
+- snapshot tighten wire framing
