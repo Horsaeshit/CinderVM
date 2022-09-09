@@ -88,3 +88,7 @@
 - arena drop wire framing
 
 - isa clarify disassembler
+
+- asm simplify exit codes
+
+- journal trim exit codes
