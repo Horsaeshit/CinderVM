@@ -24,5 +24,3 @@
 - wire prepare type lattice
 
 - cli fix fuzz harness
-
-- isa tune replay host
