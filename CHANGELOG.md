@@ -12,5 +12,3 @@
 - asm trim wire framing
 
 - packaging clean up replay host
-
-- lexer trim abstract interpretation
