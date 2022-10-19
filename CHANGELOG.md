@@ -20,3 +20,5 @@
 - wire rework dispatch loop
 
 - interp harden replay host
+
+- wire prepare type lattice
