@@ -42,3 +42,69 @@
 - fuzz fix arena alignment
 
 - budget trim journal chain
+
+- docs fix lexer spans
+
+- cli fix frame slots
+
+- docs harden stack depth checks
+
+- snapshot fix lexer spans
+
+- docs add journal chain
+
+- cli polish pending discipline
+
+- core add dispatch loop
+
+- isa wire up type lattice
+
+- journal document opcode table
+
+- docs clarify lexer spans
+
+- wire document dispatch loop
+
+- verifier simplify disassembler
+
+- wire clean up wire framing
+
+- snapshot tighten wire framing
+
+- snapshot rework fuzz harness
+
+- tests refactor opcode table
+
+- fuzz add exit codes
+
+- budget clean up replay host
+
+- ctx add wide encoding
+
+- isa prepare wide encoding
+
+- verifier trim replay host
+
+- arena drop wire framing
+
+- isa clarify disassembler
+
+- asm simplify exit codes
+
+- journal trim exit codes
+
+- packaging polish budget ledger
+
+- ctx clarify replay host
+
+- ctx wire up opcode table
+
+- disasm tighten stack depth checks
+
+- journal polish frame slots
+
+- verifier trim wire framing
+
+- arena trim label resolution
+
+- ctx rework disassembler
