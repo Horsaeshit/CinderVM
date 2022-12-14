@@ -60,5 +60,3 @@
 - isa wire up type lattice
 
 - journal document opcode table
-
-- docs clarify lexer spans
