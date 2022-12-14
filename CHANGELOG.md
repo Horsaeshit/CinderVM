@@ -52,3 +52,13 @@
 - snapshot fix lexer spans
 
 - docs add journal chain
+
+- cli polish pending discipline
+
+- core add dispatch loop
+
+- isa wire up type lattice
+
+- journal document opcode table
+
+- docs clarify lexer spans
