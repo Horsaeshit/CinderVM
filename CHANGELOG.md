@@ -112,3 +112,43 @@
 - interp refactor image sealing
 
 - disasm document dispatch loop
+
+- budget fix image sealing
+
+- ctx tighten journal chain
+
+- replay wire up opcode table
+
+- asm drop image sealing
+
+- snapshot polish dispatch loop
+
+- isa clarify wire framing
+
+- verifier stabilize label resolution
+
+- snapshot fix stack depth checks
+
+- replay clean up image sealing
+
+- journal drop abstract interpretation
+
+- tests clarify context ring
+
+- disasm fix lexer spans
+
+- cli rework type lattice
+
+- snapshot simplify type lattice
+
+- lexer polish label resolution
+
+- lexer add wide encoding
+
+- wire stabilize stack depth checks
+
+- replay clarify budget ledger
+
+- interp extend lexer spans
+
+- snapshot harden fuzz harness
