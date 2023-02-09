@@ -146,7 +146,3 @@
 - lexer add wide encoding
 
 - wire stabilize stack depth checks
-
-- replay clarify budget ledger
-
-- interp extend lexer spans
