@@ -146,3 +146,19 @@
 - lexer add wide encoding
 
 - wire stabilize stack depth checks
+
+- replay clarify budget ledger
+
+- interp extend lexer spans
+
+- snapshot harden fuzz harness
+
+- interp harden journal chain
+
+- replay stabilize label resolution
+
+- verifier refactor wire framing
+
+- ctx prepare lexer spans
+
+- arena simplify exit codes
