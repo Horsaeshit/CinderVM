@@ -164,19 +164,3 @@
 - arena simplify exit codes
 
 - snapshot harden dispatch loop
-
-- journal rework frame slots
-
-- budget add wide encoding
-
-- fuzz rework fuzz harness
-
-- tests document pending discipline
-
-- core fix stack depth checks
-
-- fuzz simplify constant pool
-
-- disasm stabilize dispatch loop
-
-- journal stabilize fork balance
