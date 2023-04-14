@@ -144,3 +144,13 @@
 - lexer polish label resolution
 
 - lexer add wide encoding
+
+- wire stabilize stack depth checks
+
+- replay clarify budget ledger
+
+- interp extend lexer spans
+
+- snapshot harden fuzz harness
+
+- interp harden journal chain
