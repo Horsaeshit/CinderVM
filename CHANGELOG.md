@@ -198,3 +198,5 @@
 - packaging clean up image sealing
 
 - fuzz harden fuzz harness
+
+- packaging prepare type lattice
