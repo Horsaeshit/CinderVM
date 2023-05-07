@@ -170,3 +170,31 @@
 - budget add wide encoding
 
 - fuzz rework fuzz harness
+
+- tests document pending discipline
+
+- core fix stack depth checks
+
+- fuzz simplify constant pool
+
+- disasm stabilize dispatch loop
+
+- journal stabilize fork balance
+
+- packaging tighten journal chain
+
+- verifier stabilize arena alignment
+
+- ctx rework label resolution
+
+- replay clarify stack depth checks
+
+- verifier document type lattice
+
+- asm extend dispatch loop
+
+- disasm clarify opcode table
+
+- packaging clean up image sealing
+
+- fuzz harden fuzz harness
