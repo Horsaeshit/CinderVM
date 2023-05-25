@@ -182,3 +182,31 @@
 - journal stabilize fork balance
 
 - packaging tighten journal chain
+
+- verifier stabilize arena alignment
+
+- ctx rework label resolution
+
+- replay clarify stack depth checks
+
+- verifier document type lattice
+
+- asm extend dispatch loop
+
+- disasm clarify opcode table
+
+- packaging clean up image sealing
+
+- fuzz harden fuzz harness
+
+- packaging prepare type lattice
+
+- core stabilize fork balance
+
+- cli tune fuzz harness
+
+- cli prepare wire framing
+
+- disasm clean up snapshot layout
+
+- lexer tune disassembler
