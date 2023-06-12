@@ -126,5 +126,3 @@
 - isa clarify wire framing
 
 - verifier stabilize label resolution
-
-- snapshot fix stack depth checks
