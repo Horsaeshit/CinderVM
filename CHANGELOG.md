@@ -126,3 +126,55 @@
 - isa clarify wire framing
 
 - verifier stabilize label resolution
+
+- snapshot fix stack depth checks
+
+- replay clean up image sealing
+
+- journal drop abstract interpretation
+
+- tests clarify context ring
+
+- disasm fix lexer spans
+
+- cli rework type lattice
+
+- snapshot simplify type lattice
+
+- lexer polish label resolution
+
+- lexer add wide encoding
+
+- wire stabilize stack depth checks
+
+- replay clarify budget ledger
+
+- interp extend lexer spans
+
+- snapshot harden fuzz harness
+
+- interp harden journal chain
+
+- replay stabilize label resolution
+
+- verifier refactor wire framing
+
+- ctx prepare lexer spans
+
+- arena simplify exit codes
+
+- snapshot harden dispatch loop
+
+- journal rework frame slots
+
+- budget add wide encoding
+
+- fuzz rework fuzz harness
+
+- tests document pending discipline
+
+- core fix stack depth checks
+
+- fuzz simplify constant pool
+
+- disasm stabilize dispatch loop
