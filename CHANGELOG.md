@@ -190,3 +190,5 @@
 - replay clarify stack depth checks
 
 - verifier document type lattice
+
+- asm extend dispatch loop
