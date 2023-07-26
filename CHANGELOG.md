@@ -192,3 +192,17 @@
 - verifier document type lattice
 
 - asm extend dispatch loop
+
+- disasm clarify opcode table
+
+- packaging clean up image sealing
+
+- fuzz harden fuzz harness
+
+- packaging prepare type lattice
+
+- core stabilize fork balance
+
+- cli tune fuzz harness
+
+- cli prepare wire framing
