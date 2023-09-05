@@ -172,3 +172,7 @@
 - fuzz rework fuzz harness
 
 - tests document pending discipline
+
+- core fix stack depth checks
+
+- fuzz simplify constant pool
