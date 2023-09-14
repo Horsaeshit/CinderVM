@@ -130,3 +130,5 @@
 - snapshot fix stack depth checks
 
 - replay clean up image sealing
+
+- journal drop abstract interpretation
