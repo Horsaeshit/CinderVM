@@ -134,5 +134,3 @@
 - journal drop abstract interpretation
 
 - tests clarify context ring
-
-- disasm fix lexer spans
