@@ -140,3 +140,51 @@
 - cli rework type lattice
 
 - snapshot simplify type lattice
+
+- lexer polish label resolution
+
+- lexer add wide encoding
+
+- wire stabilize stack depth checks
+
+- replay clarify budget ledger
+
+- interp extend lexer spans
+
+- snapshot harden fuzz harness
+
+- interp harden journal chain
+
+- replay stabilize label resolution
+
+- verifier refactor wire framing
+
+- ctx prepare lexer spans
+
+- arena simplify exit codes
+
+- snapshot harden dispatch loop
+
+- journal rework frame slots
+
+- budget add wide encoding
+
+- fuzz rework fuzz harness
+
+- tests document pending discipline
+
+- core fix stack depth checks
+
+- fuzz simplify constant pool
+
+- disasm stabilize dispatch loop
+
+- journal stabilize fork balance
+
+- packaging tighten journal chain
+
+- verifier stabilize arena alignment
+
+- ctx rework label resolution
+
+- replay clarify stack depth checks
