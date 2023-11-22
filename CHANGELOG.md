@@ -122,3 +122,19 @@
 - asm drop image sealing
 
 - snapshot polish dispatch loop
+
+- isa clarify wire framing
+
+- verifier stabilize label resolution
+
+- snapshot fix stack depth checks
+
+- replay clean up image sealing
+
+- journal drop abstract interpretation
+
+- tests clarify context ring
+
+- disasm fix lexer spans
+
+- cli rework type lattice
