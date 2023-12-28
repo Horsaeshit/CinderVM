@@ -156,3 +156,5 @@
 - interp harden journal chain
 
 - replay stabilize label resolution
+
+- verifier refactor wire framing
