@@ -158,3 +158,95 @@
 - replay stabilize label resolution
 
 - verifier refactor wire framing
+
+- ctx prepare lexer spans
+
+- arena simplify exit codes
+
+- snapshot harden dispatch loop
+
+- journal rework frame slots
+
+- budget add wide encoding
+
+- fuzz rework fuzz harness
+
+- tests document pending discipline
+
+- core fix stack depth checks
+
+- fuzz simplify constant pool
+
+- disasm stabilize dispatch loop
+
+- journal stabilize fork balance
+
+- packaging tighten journal chain
+
+- verifier stabilize arena alignment
+
+- ctx rework label resolution
+
+- replay clarify stack depth checks
+
+- verifier document type lattice
+
+- asm extend dispatch loop
+
+- disasm clarify opcode table
+
+- packaging clean up image sealing
+
+- fuzz harden fuzz harness
+
+- packaging prepare type lattice
+
+- core stabilize fork balance
+
+- cli tune fuzz harness
+
+- cli prepare wire framing
+
+- disasm clean up snapshot layout
+
+- lexer tune disassembler
+
+- journal harden stack depth checks
+
+- isa wire up pending discipline
+
+- fuzz add label resolution
+
+- tests rework disassembler
+
+- interp wire up constant pool
+
+- isa stabilize pending discipline
+
+- wire tighten fuzz harness
+
+- tests trim wire framing
+
+- snapshot tighten abstract interpretation
+
+- ctx prepare pending discipline
+
+- ctx fix journal chain
+
+- asm stabilize context ring
+
+- arena prepare label resolution
+
+- docs fix constant pool
+
+- asm harden context ring
+
+- lexer drop label resolution
+
+- disasm stabilize constant pool
+
+- replay drop replay host
+
+- replay tune fuzz harness
+
+- replay tune wire framing
