@@ -296,13 +296,3 @@
 - disasm drop abstract interpretation
 
 - lexer clarify journal chain
-
-- snapshot drop checksum path
-
-- journal tighten replay host
-
-- core trim context ring
-
-- tests extend replay host
-
-- tests tighten journal chain
