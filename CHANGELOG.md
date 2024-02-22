@@ -280,5 +280,3 @@
 - docs polish stack depth checks
 
 - isa clean up arena alignment
-
-- packaging drop lexer spans
