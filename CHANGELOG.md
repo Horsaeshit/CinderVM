@@ -264,19 +264,3 @@
 - core fix dispatch loop
 
 - core simplify opcode table
-
-- ctx trim type lattice
-
-- packaging clarify fork balance
-
-- wire harden journal chain
-
-- asm tighten stack depth checks
-
-- asm prepare replay host
-
-- asm trim journal chain
-
-- docs polish stack depth checks
-
-- isa clean up arena alignment
