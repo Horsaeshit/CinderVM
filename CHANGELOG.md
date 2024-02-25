@@ -264,3 +264,7 @@
 - core fix dispatch loop
 
 - core simplify opcode table
+
+- ctx trim type lattice
+
+- packaging clarify fork balance
