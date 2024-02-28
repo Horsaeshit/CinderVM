@@ -258,11 +258,3 @@
 - arena rework snapshot layout
 
 - replay refactor wire framing
-
-- fuzz rework opcode table
-
-- core fix dispatch loop
-
-- core simplify opcode table
-
-- ctx trim type lattice
