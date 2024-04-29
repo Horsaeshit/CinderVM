@@ -230,5 +230,3 @@
 - snapshot tighten abstract interpretation
 
 - ctx prepare pending discipline
-
-- ctx fix journal chain
