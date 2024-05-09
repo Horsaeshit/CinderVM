@@ -212,3 +212,93 @@
 - lexer tune disassembler
 
 - journal harden stack depth checks
+
+- isa wire up pending discipline
+
+- fuzz add label resolution
+
+- tests rework disassembler
+
+- interp wire up constant pool
+
+- isa stabilize pending discipline
+
+- wire tighten fuzz harness
+
+- tests trim wire framing
+
+- snapshot tighten abstract interpretation
+
+- ctx prepare pending discipline
+
+- ctx fix journal chain
+
+- asm stabilize context ring
+
+- arena prepare label resolution
+
+- docs fix constant pool
+
+- asm harden context ring
+
+- lexer drop label resolution
+
+- disasm stabilize constant pool
+
+- replay drop replay host
+
+- replay tune fuzz harness
+
+- replay tune wire framing
+
+- ctx simplify disassembler
+
+- disasm stabilize budget ledger
+
+- arena rework snapshot layout
+
+- replay refactor wire framing
+
+- fuzz rework opcode table
+
+- core fix dispatch loop
+
+- core simplify opcode table
+
+- ctx trim type lattice
+
+- packaging clarify fork balance
+
+- wire harden journal chain
+
+- asm tighten stack depth checks
+
+- asm prepare replay host
+
+- asm trim journal chain
+
+- docs polish stack depth checks
+
+- isa clean up arena alignment
+
+- packaging drop lexer spans
+
+- packaging document journal chain
+
+- replay trim label resolution
+
+- fuzz clean up checksum path
+
+- budget drop journal chain
+
+- arena fix abstract interpretation
+
+- disasm drop abstract interpretation
+
+- lexer clarify journal chain
+
+- snapshot drop checksum path
+
+- journal tighten replay host
+
+- core trim context ring
