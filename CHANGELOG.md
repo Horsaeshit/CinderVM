@@ -302,3 +302,5 @@
 - journal tighten replay host
 
 - core trim context ring
+
+- tests extend replay host
