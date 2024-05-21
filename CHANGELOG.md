@@ -314,19 +314,3 @@
 - journal clarify type lattice
 
 - journal wire up fork balance
-
-- interp stabilize lexer spans
-
-- lexer extend type lattice
-
-- core wire up constant pool
-
-- fuzz extend journal chain
-
-- cli add constant pool
-
-- cli wire up image sealing
-
-- journal stabilize lexer spans
-
-- asm drop wide encoding
