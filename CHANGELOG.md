@@ -238,5 +238,3 @@
 - arena prepare label resolution
 
 - docs fix constant pool
-
-- asm harden context ring
