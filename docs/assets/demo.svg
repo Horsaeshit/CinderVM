@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 452" width="860" height="452" role="img"
+     aria-label="Terminal recording: cinderc compiles triage.cdx, cinder run executes it, cinder replay seeks to a checkpoint">
+  <defs>
+    <style>
+      .m  { font-family: "SFMono-Regular", "JetBrains Mono", Consolas, monospace; font-size: 13px; }
+      .p  { fill: #56d364; }
+      .c  { fill: #e6edf3; }
+      .d  { fill: #8b949e; }
+      .k  { fill: #79c0ff; }
+      .w  { fill: #d29922; }
+      .g  { fill: #3fb950; }
+      .v  { fill: #bc8cff; }
+      .s  { fill: #ffa657; }
+    </style>
+    <clipPath id="body"><rect x="0" y="40" width="860" height="412"/></clipPath>
+  </defs>
+
+  <rect width="860" height="452" rx="10" fill="#0d1117"/>
+  <rect width="860" height="40" rx="10" fill="#161b22"/>
+  <rect y="30" width="860" height="10" fill="#161b22"/>
+  <line x1="0" y1="40" x2="860" y2="40" stroke="#30363d"/>
+  <circle cx="22" cy="20" r="6" fill="#ff5f57"/>
+  <circle cx="42" cy="20" r="6" fill="#febc2e"/>
+  <circle cx="62" cy="20" r="6" fill="#28c840"/>
+  <text class="m d" x="430" y="25" text-anchor="middle">cindervm — examples/triage</text>
+
+  <g clip-path="url(#body)">
+
+    <!-- ── act 1: compile ───────────────────────────────────────────── -->
+    <g opacity="0">
+      <animate attributeName="opacity" values="0;1" begin="0.3s" dur="0.01s" fill="freeze"/>
+      <text class="m" x="18" y="70"><tspan class="p">$</tspan><tspan class="c" x="36"> cinderc triage.cdx -o triage.cdxb</tspan></text>
+    </g>
+    <g opacity="0">
+      <animate attributeName="opacity" values="0;1" begin="1.1s" dur="0.01s" fill="freeze"/>
+      <text class="m" x="18" y="92"><tspan class="k">   compiled</tspan><tspan class="c">  triage.cdxb   </tspan><tspan class="d">264 B   1 fn   14 insns   maxstack 6</tspan></text>
+    </g>
+    <g opacity="0">
+      <animate attributeName="opacity" values="0;1" begin="1.5s" dur="0.01s" fill="freeze"/>
+      <text class="m" x="18" y="112"><tspan class="g">   verified</tspan><tspan class="c">  frames=14/14  types=ok  stack=ok  effects=ok    </tspan><tspan class="d">1.9 ms</tspan></text>
+    </g>
+
+    <!-- ── act 2: run ───────────────────────────────────────────────── -->
+    <g opacity="0">
+      <animate attributeName="opacity" values="0;1" begin="2.2s" dur="0.01s" fill="freeze"/>
+      <text class="m" x="18" y="146"><tspan class="p">$</tspan><tspan class="c" x="36"> cinder run triage.cdxb --arg "segfault on startup" --journal run.jl</tspan></text>
+    </g>
+    <g opacity="0">
+      <animate attributeName="opacity" values="0;1" begin="3.0s" dur="0.01s" fill="freeze"/>
+      <text class="m" x="18" y="168"><tspan class="d">   [0000]</tspan><tspan class="k">  calltool</tspan><tspan class="c">  llm.complete</tspan><tspan class="s" x="330">↑ 41 tok</tspan></text>
+    </g>
