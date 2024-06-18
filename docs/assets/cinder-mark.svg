@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 132 132" width="132" height="132" role="img" aria-label="cindervm">
+  <defs>
+    <linearGradient id="ember" x1="0" y1="1" x2="0.35" y2="0">
+      <stop offset="0" stop-color="#7a1f0f"/>
+      <stop offset="0.45" stop-color="#e2521b"/>
+      <stop offset="1" stop-color="#ffc061"/>
+    </linearGradient>
+    <linearGradient id="edge" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#6f42c1"/>
+      <stop offset="1" stop-color="#2f6bd8"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="6" y="6" width="120" height="120" rx="26" fill="#0d1117"/>
+  <rect x="6.5" y="6.5" width="119" height="119" rx="25.5" fill="none" stroke="url(#edge)" stroke-width="1"/>
+
+  <!-- operand stack: four slots, bottom-anchored -->
+  <g fill="none" stroke="#30363d" stroke-width="2">
+    <rect x="26" y="86" width="34" height="14" rx="3"/>
+    <rect x="26" y="68" width="34" height="14" rx="3"/>
+    <rect x="26" y="50" width="34" height="14" rx="3"/>
+    <rect x="26" y="32" width="34" height="14" rx="3" stroke-dasharray="3 3"/>
