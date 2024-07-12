@@ -244,15 +244,3 @@
 - lexer drop label resolution
 
 - disasm stabilize constant pool
-
-- replay drop replay host
-
-- replay tune fuzz harness
-
-- replay tune wire framing
-
-- ctx simplify disassembler
-
-- disasm stabilize budget ledger
-
-- arena rework snapshot layout
