@@ -242,5 +242,3 @@
 - asm harden context ring
 
 - lexer drop label resolution
-
-- disasm stabilize constant pool
