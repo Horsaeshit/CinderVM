@@ -220,5 +220,3 @@
 - tests rework disassembler
 
 - interp wire up constant pool
-
-- isa stabilize pending discipline
