@@ -318,5 +318,3 @@
 - interp stabilize lexer spans
 
 - lexer extend type lattice
-
-- core wire up constant pool
