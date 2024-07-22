@@ -318,3 +318,25 @@
 - interp stabilize lexer spans
 
 - lexer extend type lattice
+
+- core wire up constant pool
+
+- fuzz extend journal chain
+
+- cli add constant pool
+
+- cli wire up image sealing
+
+- journal stabilize lexer spans
+
+- asm drop wide encoding
+
+- packaging document budget ledger
+
+- cli simplify wire framing
+
+- snapshot simplify label resolution
+
+- wire add stack depth checks
+
+- arena refactor type lattice
