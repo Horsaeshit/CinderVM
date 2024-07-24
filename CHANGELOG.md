@@ -332,5 +332,3 @@
 - asm drop wide encoding
 
 - packaging document budget ledger
-
-- cli simplify wire framing
