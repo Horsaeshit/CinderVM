@@ -274,5 +274,3 @@
 - asm tighten stack depth checks
 
 - asm prepare replay host
-
-- asm trim journal chain
