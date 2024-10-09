@@ -228,9 +228,3 @@
 - tests trim wire framing
 
 - snapshot tighten abstract interpretation
-
-- ctx prepare pending discipline
-
-- ctx fix journal chain
-
-- asm stabilize context ring
