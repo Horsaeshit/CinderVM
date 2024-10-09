@@ -226,5 +226,3 @@
 - wire tighten fuzz harness
 
 - tests trim wire framing
-
-- snapshot tighten abstract interpretation
