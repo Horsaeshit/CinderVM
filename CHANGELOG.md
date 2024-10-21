@@ -270,5 +270,3 @@
 - packaging clarify fork balance
 
 - wire harden journal chain
-
-- asm tighten stack depth checks
