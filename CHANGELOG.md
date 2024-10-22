@@ -270,3 +270,45 @@
 - packaging clarify fork balance
 
 - wire harden journal chain
+
+- asm tighten stack depth checks
+
+- asm prepare replay host
+
+- asm trim journal chain
+
+- docs polish stack depth checks
+
+- isa clean up arena alignment
+
+- packaging drop lexer spans
+
+- packaging document journal chain
+
+- replay trim label resolution
+
+- fuzz clean up checksum path
+
+- budget drop journal chain
+
+- arena fix abstract interpretation
+
+- disasm drop abstract interpretation
+
+- lexer clarify journal chain
+
+- snapshot drop checksum path
+
+- journal tighten replay host
+
+- core trim context ring
+
+- tests extend replay host
+
+- tests tighten journal chain
+
+- budget clean up fork balance
+
+- tests tighten wide encoding
+
+- journal clarify type lattice
