@@ -336,5 +336,3 @@
 - cli simplify wire framing
 
 - snapshot simplify label resolution
-
-- wire add stack depth checks
