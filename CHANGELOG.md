@@ -298,3 +298,43 @@
 - lexer clarify journal chain
 
 - snapshot drop checksum path
+
+- journal tighten replay host
+
+- core trim context ring
+
+- tests extend replay host
+
+- tests tighten journal chain
+
+- budget clean up fork balance
+
+- tests tighten wide encoding
+
+- journal clarify type lattice
+
+- journal wire up fork balance
+
+- interp stabilize lexer spans
+
+- lexer extend type lattice
+
+- core wire up constant pool
+
+- fuzz extend journal chain
+
+- cli add constant pool
+
+- cli wire up image sealing
+
+- journal stabilize lexer spans
+
+- asm drop wide encoding
+
+- packaging document budget ledger
+
+- cli simplify wire framing
+
+- snapshot simplify label resolution
+
+- wire add stack depth checks
