@@ -284,3 +284,5 @@
 - packaging drop lexer spans
 
 - packaging document journal chain
+
+- replay trim label resolution
