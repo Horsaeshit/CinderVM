@@ -308,3 +308,5 @@
 - tests tighten journal chain
 
 - budget clean up fork balance
+
+- tests tighten wide encoding
