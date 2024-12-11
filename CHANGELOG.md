@@ -252,5 +252,3 @@
 - replay tune wire framing
 
 - ctx simplify disassembler
-
-- disasm stabilize budget ledger
