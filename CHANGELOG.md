@@ -392,3 +392,15 @@
 - fuzz drop arena alignment
 
 - interp drop dispatch loop
+
+- interp trim pending discipline
+
+- journal polish fork balance
+
+- wire rework exit codes
+
+- arena drop context ring
+
+- verifier clean up checksum path
+
+- tests extend lexer spans
