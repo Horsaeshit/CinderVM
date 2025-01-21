@@ -402,5 +402,3 @@
 - arena drop context ring
 
 - verifier clean up checksum path
-
-- tests extend lexer spans
