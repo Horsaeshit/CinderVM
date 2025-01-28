@@ -346,5 +346,3 @@
 - core trim fuzz harness
 
 - docs add budget ledger
-
-- interp add label resolution
