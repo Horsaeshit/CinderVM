@@ -346,3 +346,15 @@
 - core trim fuzz harness
 
 - docs add budget ledger
+
+- interp add label resolution
+
+- interp document label resolution
+
+- tests extend exit codes
+
+- interp add wide encoding
+
+- disasm rework wire framing
+
+- wire fix abstract interpretation
