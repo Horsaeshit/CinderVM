@@ -358,3 +358,15 @@
 - disasm rework wire framing
 
 - wire fix abstract interpretation
+
+- fuzz clarify context ring
+
+- isa wire up abstract interpretation
+
+- cli clarify stack depth checks
+
+- asm harden fuzz harness
+
+- asm stabilize abstract interpretation
+
+- snapshot clarify constant pool
