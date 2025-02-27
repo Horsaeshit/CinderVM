@@ -370,3 +370,5 @@
 - asm stabilize abstract interpretation
 
 - snapshot clarify constant pool
+
+- ctx harden budget ledger
