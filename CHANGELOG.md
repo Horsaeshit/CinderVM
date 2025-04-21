@@ -418,11 +418,3 @@
 - journal clarify pending discipline
 
 - verifier stabilize type lattice
-
-- replay harden fuzz harness
-
-- arena fix journal chain
-
-- ctx clean up lexer spans
-
-- isa harden disassembler
