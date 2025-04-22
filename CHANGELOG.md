@@ -418,3 +418,23 @@
 - journal clarify pending discipline
 
 - verifier stabilize type lattice
+
+- replay harden fuzz harness
+
+- arena fix journal chain
+
+- ctx clean up lexer spans
+
+- isa harden disassembler
+
+- cli trim disassembler
+
+- journal stabilize replay host
+
+- interp polish type lattice
+
+- verifier harden stack depth checks
+
+- lexer clarify dispatch loop
+
+- journal drop snapshot layout
