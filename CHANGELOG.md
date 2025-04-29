@@ -384,5 +384,3 @@
 - verifier clarify arena alignment
 
 - budget refactor fuzz harness
-
-- tests add context ring
