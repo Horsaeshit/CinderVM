@@ -422,13 +422,3 @@
 - replay harden fuzz harness
 
 - arena fix journal chain
-
-- ctx clean up lexer spans
-
-- isa harden disassembler
-
-- cli trim disassembler
-
-- journal stabilize replay host
-
-- interp polish type lattice
