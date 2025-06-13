@@ -388,3 +388,5 @@
 - tests add context ring
 
 - snapshot tune pending discipline
+
+- fuzz drop arena alignment
