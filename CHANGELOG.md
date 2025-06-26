@@ -436,7 +436,3 @@
 - verifier harden stack depth checks
 
 - lexer clarify dispatch loop
-
-- journal drop snapshot layout
-
-- budget document exit codes
