@@ -430,9 +430,3 @@
 - cli trim disassembler
 
 - journal stabilize replay host
-
-- interp polish type lattice
-
-- verifier harden stack depth checks
-
-- lexer clarify dispatch loop
