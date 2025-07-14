@@ -400,3 +400,23 @@
 - wire rework exit codes
 
 - arena drop context ring
+
+- verifier clean up checksum path
+
+- tests extend lexer spans
+
+- asm prepare opcode table
+
+- packaging prepare stack depth checks
+
+- snapshot wire up type lattice
+
+- isa prepare opcode table
+
+- replay document context ring
+
+- journal clarify pending discipline
+
+- verifier stabilize type lattice
+
+- replay harden fuzz harness
