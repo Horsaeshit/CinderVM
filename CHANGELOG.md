@@ -378,19 +378,3 @@
 - packaging drop pending discipline
 
 - lexer trim arena alignment
-
-- packaging stabilize journal chain
-
-- verifier clarify arena alignment
-
-- budget refactor fuzz harness
-
-- tests add context ring
-
-- snapshot tune pending discipline
-
-- fuzz drop arena alignment
-
-- interp drop dispatch loop
-
-- interp trim pending discipline
