@@ -342,11 +342,3 @@
 - arena refactor type lattice
 
 - verifier add arena alignment
-
-- core trim fuzz harness
-
-- docs add budget ledger
-
-- interp add label resolution
-
-- interp document label resolution
