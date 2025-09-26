@@ -376,3 +376,7 @@
 - wire trim frame slots
 
 - packaging drop pending discipline
+
+- lexer trim arena alignment
+
+- packaging stabilize journal chain
