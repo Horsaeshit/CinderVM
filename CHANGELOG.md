@@ -360,5 +360,3 @@
 - wire fix abstract interpretation
 
 - fuzz clarify context ring
-
-- isa wire up abstract interpretation
