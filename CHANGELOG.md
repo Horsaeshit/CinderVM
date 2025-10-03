@@ -362,5 +362,3 @@
 - fuzz clarify context ring
 
 - isa wire up abstract interpretation
-
-- cli clarify stack depth checks
