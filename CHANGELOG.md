@@ -354,9 +354,3 @@
 - tests extend exit codes
 
 - interp add wide encoding
-
-- disasm rework wire framing
-
-- wire fix abstract interpretation
-
-- fuzz clarify context ring
