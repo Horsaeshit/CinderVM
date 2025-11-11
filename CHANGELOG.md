@@ -408,5 +408,3 @@
 - asm prepare opcode table
 
 - packaging prepare stack depth checks
-
-- snapshot wire up type lattice
