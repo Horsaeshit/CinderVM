@@ -408,3 +408,39 @@
 - asm prepare opcode table
 
 - packaging prepare stack depth checks
+
+- snapshot wire up type lattice
+
+- isa prepare opcode table
+
+- replay document context ring
+
+- journal clarify pending discipline
+
+- verifier stabilize type lattice
+
+- replay harden fuzz harness
+
+- arena fix journal chain
+
+- ctx clean up lexer spans
+
+- isa harden disassembler
+
+- cli trim disassembler
+
+- journal stabilize replay host
+
+- interp polish type lattice
+
+- verifier harden stack depth checks
+
+- lexer clarify dispatch loop
+
+- journal drop snapshot layout
+
+- budget document exit codes
+
+- snapshot tighten snapshot layout
+
+- journal refactor abstract interpretation
