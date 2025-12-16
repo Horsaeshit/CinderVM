@@ -406,3 +406,25 @@
 - tests extend lexer spans
 
 - asm prepare opcode table
+
+- packaging prepare stack depth checks
+
+- snapshot wire up type lattice
+
+- isa prepare opcode table
+
+- replay document context ring
+
+- journal clarify pending discipline
+
+- verifier stabilize type lattice
+
+- replay harden fuzz harness
+
+- arena fix journal chain
+
+- ctx clean up lexer spans
+
+- isa harden disassembler
+
+- cli trim disassembler
