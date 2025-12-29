@@ -374,3 +374,41 @@
 - ctx harden budget ledger
 
 - wire trim frame slots
+
+- packaging drop pending discipline
+
+- lexer trim arena alignment
+
+- packaging stabilize journal chain
+
+- verifier clarify arena alignment
+
+- budget refactor fuzz harness
+
+- tests add context ring
+
+- snapshot tune pending discipline
+
+- fuzz drop arena alignment
+
+- interp drop dispatch loop
+
+- interp trim pending discipline
+
+- journal polish fork balance
+
+- wire rework exit codes
+
+- arena drop context ring
+
+- verifier clean up checksum path
+
+- tests extend lexer spans
+
+- asm prepare opcode table
+
+- packaging prepare stack depth checks
+
+- snapshot wire up type lattice
+
+- isa prepare opcode table
