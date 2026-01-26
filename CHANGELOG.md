@@ -486,17 +486,3 @@
 - interp clarify exit codes
 
 - packaging drop journal chain
-
-- fuzz extend abstract interpretation
-
-- ctx prepare fuzz harness
-
-- fuzz clean up journal chain
-
-- budget polish snapshot layout
-
-- packaging fix replay host
-
-- tests refactor exit codes
-
-- asm clarify checksum path
