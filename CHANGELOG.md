@@ -486,3 +486,5 @@
 - interp clarify exit codes
 
 - packaging drop journal chain
+
+- fuzz extend abstract interpretation
