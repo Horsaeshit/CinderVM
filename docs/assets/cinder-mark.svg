@@ -20,3 +20,19 @@
     <rect x="26" y="68" width="34" height="14" rx="3"/>
     <rect x="26" y="50" width="34" height="14" rx="3"/>
     <rect x="26" y="32" width="34" height="14" rx="3" stroke-dasharray="3 3"/>
+  </g>
+  <rect x="26" y="86" width="34" height="14" rx="3" fill="url(#ember)" opacity="0.85"/>
+  <rect x="26" y="68" width="34" height="14" rx="3" fill="url(#ember)" opacity="0.5"/>
+
+  <!-- dispatch arrow: stack -> pc -->
+  <path d="M64 75 L84 75" stroke="#8b949e" stroke-width="2" stroke-linecap="round"/>
+  <path d="M80 71 L85 75 L80 79" fill="none" stroke="#8b949e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- program counter ring -->
+  <circle cx="94" cy="75" r="13" fill="none" stroke="#30363d" stroke-width="3"/>
+  <path d="M94 62 A13 13 0 0 1 105 82" fill="none" stroke="url(#ember)" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- continuation glyph: snapshot boundary -->
+  <path d="M30 24 L102 24" stroke="#6f42c1" stroke-width="2" stroke-linecap="round" stroke-dasharray="6 4"/>
+  <circle cx="102" cy="24" r="3.5" fill="#6f42c1"/>
+</svg>
