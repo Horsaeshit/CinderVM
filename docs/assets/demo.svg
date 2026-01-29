@@ -49,3 +49,65 @@
       <animate attributeName="opacity" values="0;1" begin="3.0s" dur="0.01s" fill="freeze"/>
       <text class="m" x="18" y="168"><tspan class="d">   [0000]</tspan><tspan class="k">  calltool</tspan><tspan class="c">  llm.complete</tspan><tspan class="s" x="330">↑ 41 tok</tspan></text>
     </g>
+    <g opacity="0">
+      <animate attributeName="opacity" values="0;1" begin="3.7s" dur="0.01s" fill="freeze"/>
+      <text class="m" x="18" y="188"><tspan class="d">   [0001]</tspan><tspan class="k">  await</tspan><tspan class="s" x="330">↓ 3 tok</tspan><tspan class="d" x="410">612 ms</tspan><tspan class="c" x="480">"critical"</tspan></text>
+    </g>
+    <g opacity="0">
+      <animate attributeName="opacity" values="0;1" begin="4.1s" dur="0.01s" fill="freeze"/>
+      <text class="m" x="18" y="208"><tspan class="d">   [0002]</tspan><tspan class="v">  checkpoint</tspan><tspan class="c"> pre-label</tspan><tspan class="v" x="330">● 1.4 KB</tspan></text>
+    </g>
+    <g opacity="0">
+      <animate attributeName="opacity" values="0;1" begin="4.5s" dur="0.01s" fill="freeze"/>
+      <text class="m" x="18" y="228"><tspan class="d">   [0003]</tspan><tspan class="k">  calltool</tspan><tspan class="c">  github.issue.label</tspan><tspan class="d" x="330">↑ —</tspan></text>
+    </g>
+    <g opacity="0">
+      <animate attributeName="opacity" values="0;1" begin="5.0s" dur="0.01s" fill="freeze"/>
+      <text class="m" x="18" y="248"><tspan class="d">   [0004]</tspan><tspan class="k">  await</tspan><tspan class="d" x="330">↓ —</tspan><tspan class="d" x="410">208 ms</tspan><tspan class="g" x="480">ok</tspan></text>
+    </g>
+    <g opacity="0">
+      <animate attributeName="opacity" values="0;1" begin="5.4s" dur="0.01s" fill="freeze"/>
+      <text class="m" x="18" y="270"><tspan class="g">   halt 0</tspan><tspan class="d">      wall 0.83 s   tokens 44/8000   tools 2/6</tspan></text>
+    </g>
+
+    <!-- ── act 3: replay ────────────────────────────────────────────── -->
+    <g opacity="0">
+      <animate attributeName="opacity" values="0;1" begin="6.2s" dur="0.01s" fill="freeze"/>
+      <text class="m" x="18" y="304"><tspan class="p">$</tspan><tspan class="c" x="36"> cinder replay run.jl --seek 0002 --inspect stack</tspan></text>
+    </g>
+    <g opacity="0">
+      <animate attributeName="opacity" values="0;1" begin="7.0s" dur="0.01s" fill="freeze"/>
+      <text class="m" x="18" y="326"><tspan class="v">   stack</tspan><tspan class="c">  [0] str  "critical"    </tspan><tspan class="d">(heap #3, 8 B)</tspan></text>
+    </g>
+    <g opacity="0">
+      <animate attributeName="opacity" values="0;1" begin="7.3s" dur="0.01s" fill="freeze"/>
+      <text class="m" x="18" y="346"><tspan class="v">   frame</tspan><tspan class="c">  main  </tspan><tspan class="d">pc=0x1a  depth=1/6</tspan></text>
+    </g>
+    <g opacity="0">
+      <animate attributeName="opacity" values="0;1" begin="7.6s" dur="0.01s" fill="freeze"/>
+      <text class="m" x="18" y="366"><tspan class="v">   budget</tspan><tspan class="d"> tokens 44  wall 0.61s  tools 1</tspan></text>
+    </g>
+
+    <!-- ── act 4: replay verification ───────────────────────────────── -->
+    <g opacity="0">
+      <animate attributeName="opacity" values="0;1" begin="8.3s" dur="0.01s" fill="freeze"/>
+      <text class="m" x="18" y="400"><tspan class="p">$</tspan><tspan class="c" x="36"> cinder replay run.jl --verify-replay</tspan></text>
+    </g>
+    <g opacity="0">
+      <animate attributeName="opacity" values="0;1" begin="9.1s" dur="0.01s" fill="freeze"/>
+      <text class="m" x="18" y="422"><tspan class="g">   ✓</tspan><tspan class="c"> 5/5 states match recorded digests   </tspan><tspan class="g">✓</tspan><tspan class="c"> chain intact </tspan><tspan class="d">(head 3d84…)</tspan></text>
+    </g>
+
+    <!-- cursor: parked at each prompt, then final -->
+    <rect class="cur" x="36" y="59" width="8" height="15" fill="#56d364">
+      <animate attributeName="opacity" values="1;1;0;1" dur="1s" repeatCount="indefinite"/>
+      <animate attributeName="x" values="36;308;36;544;36;422;36;340" keyTimes="0;0.03;0.24;0.27;0.66;0.69;0.88;0.91"
+               dur="11s" fill="freeze" calcMode="discrete"/>
+      <animate attributeName="y" values="59;59;135;135;293;293;389;389" keyTimes="0;0.03;0.24;0.27;0.66;0.69;0.88;0.91"
+               dur="11s" fill="freeze" calcMode="discrete"/>
+    </rect>
+
+    <!-- loop marker -->
+    <animate attributeName="opacity" values="1;1;1" dur="11s" repeatCount="indefinite"/>
+  </g>
+</svg>
