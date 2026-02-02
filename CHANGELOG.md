@@ -448,7 +448,3 @@
 - docs tighten label resolution
 
 - fuzz stabilize snapshot layout
-
-- tests refactor snapshot layout
-
-- fuzz fix journal chain
