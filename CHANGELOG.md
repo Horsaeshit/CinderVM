@@ -498,3 +498,17 @@
 - packaging fix replay host
 
 - tests refactor exit codes
+
+- asm clarify checksum path
+
+- ctx clean up dispatch loop
+
+- docs drop label resolution
+
+- cli clean up context ring
+
+- docs prepare opcode table
+
+- journal extend disassembler
+
+- journal prepare context ring
