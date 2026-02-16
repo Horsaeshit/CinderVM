@@ -512,3 +512,5 @@
 - journal extend disassembler
 
 - journal prepare context ring
+
+- snapshot prepare lexer spans
