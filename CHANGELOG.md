@@ -454,3 +454,29 @@
 - fuzz fix journal chain
 
 - isa stabilize snapshot layout
+
+- cli rework disassembler
+
+- verifier fix disassembler
+
+- docs document dispatch loop
+
+- fuzz drop lexer spans
+
+- asm add stack depth checks
+
+- packaging simplify fuzz harness
+
+- isa clean up label resolution
+
+- tests trim context ring
+
+- budget extend wide encoding
+
+- core extend snapshot layout
+
+- fuzz tighten lexer spans
+
+- ctx clean up exit codes
+
+- verifier simplify snapshot layout
