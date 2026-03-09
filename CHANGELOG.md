@@ -480,3 +480,19 @@
 - ctx clean up exit codes
 
 - verifier simplify snapshot layout
+
+- disasm prepare frame slots
+
+- interp clarify exit codes
+
+- packaging drop journal chain
+
+- fuzz extend abstract interpretation
+
+- ctx prepare fuzz harness
+
+- fuzz clean up journal chain
+
+- budget polish snapshot layout
+
+- packaging fix replay host
