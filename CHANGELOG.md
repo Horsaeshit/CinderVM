@@ -456,3 +456,9 @@
 - isa stabilize snapshot layout
 
 - cli rework disassembler
+
+- verifier fix disassembler
+
+- docs document dispatch loop
+
+- fuzz drop lexer spans
