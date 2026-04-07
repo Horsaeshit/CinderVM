@@ -464,5 +464,3 @@
 - fuzz drop lexer spans
 
 - asm add stack depth checks
-
-- packaging simplify fuzz harness
