@@ -40,3 +40,39 @@ impl ContextRing {
         }
         Ok(())
     }
+
+    /// Materialize the current window as a list of segment values.
+    #[must_use]
+    pub fn window(&self) -> Vec<Value> {
+        self.segments.iter().map(|s| Value::int(s[0] as i64)).collect()
+    }
+
+    /// Approximate token cost: bytes in the window.
+    #[must_use]
+    pub fn cost(&self) -> i64 {
+        self.segments.iter().map(|s| s.len() as i64).sum()
+    }
+
+    #[must_use]
+    pub fn len(&self) -> usize {
+        self.segments.len()
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn ring_evicts_oldest_first() {
+        let mut r = ContextRing::new(3);
+        r.push(0, b"a").unwrap();
+        r.push(0, b"b").unwrap();
+        r.push(0, b"c").unwrap();
+        assert!(r.push(0, b"d").is_err());
+        r.pop_oldest(1).unwrap();
+        r.push(0, b"d").unwrap();
+        assert_eq!(r.len(), 3);
+        assert_eq!(r.cost(), 6);
+    }
+}
