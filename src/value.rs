@@ -223,3 +223,189 @@ impl Value {
     pub fn is_truthy(self) -> bool {
         match self.tag {
             Tag::Void => false,
+            Tag::Int => self.payload != 0,
+            Tag::Str | Tag::Bytes | Tag::List => self.handle_unchecked().len != 0,
+            Tag::Pending => true,
+        }
+    }
+
+    /// Integer payload, or a type error naming what was found.
+    pub fn as_int(self) -> Result<i64> {
+        if matches!(self.tag, Tag::Int) {
+            Ok(self.payload as i64)
+        } else {
+            Err(self.tag_error(Ty::Int))
+        }
+    }
+
+    /// Arena handle for any arena-resident tag.
+    pub fn as_handle(self) -> Result<Handle> {
+        if self.tag.is_arena() {
+            Ok(Handle::from_bits(self.payload))
+        } else {
+            Err(self.tag_error(Ty::Handle))
+        }
+    }
+
+    /// Arena handle, requiring a specific tag. `cat` uses this to refuse mixing
+    /// a `str` with a `bytes` even though both are arena-resident.
+    pub fn as_handle_of(self, want: Tag) -> Result<Handle> {
+        if self.tag == want {
+            Ok(Handle::from_bits(self.payload))
+        } else {
+            Err(self.tag_error(want.ty()))
+        }
+    }
+
+    pub fn as_pending(self) -> Result<EffectId> {
+        if matches!(self.tag, Tag::Pending) {
+            Ok(EffectId(self.payload))
+        } else {
+            Err(self.tag_error(Ty::Pending))
+        }
+    }
+
+    /// Handle without a tag check.
+    ///
+    /// Only for paths where the tag was already matched — [`Value::is_truthy`]
+    /// and the snapshot writer. Returns [`Handle::EMPTY`]-shaped garbage rather
+    /// than misbehaving if misused, because the payload is just bits.
+    #[must_use]
+    fn handle_unchecked(self) -> Handle {
+        Handle::from_bits(self.payload)
+    }
+
+    fn tag_error(self, want: Ty) -> Diag {
+        Diag::new(
+            Code::TagMismatch,
+            format!("expected {}, found {}", want.name(), self.tag.name()),
+        )
+    }
+
+    /// Structural equality for the `eq` instruction, at the level that does not
+    /// need the arena: same tag and same payload bits.
+    ///
+    /// Arena values compare by handle here, so two equal strings at different
+    /// offsets are *not* equal by this function alone. `interp` resolves that by
+    /// interning every constant and by comparing arena contents for the
+    /// `Str`/`Bytes` case; see `interp::exec_eq`. Keeping the shallow case here
+    /// lets the interpreter skip the arena entirely for integers.
+    #[must_use]
+    pub fn shallow_eq(self, other: Self) -> bool {
+        self.tag == other.tag && self.payload == other.payload
+    }
+
+    /// Write the serialized form into `out`. Little-endian, matching the rest of
+    /// the container formats.
+    pub fn write(self, out: &mut Vec<u8>) {
+        out.push(self.tag as u8);
+        out.extend_from_slice(&[0u8; 7]);
+        out.extend_from_slice(&self.payload.to_le_bytes());
+    }
+
+    /// Read a serialized operand slot.
+    ///
+    /// Validates the tag but not the payload: an arena handle's extent is
+    /// checked by `cont::restore` against the arena it ships with, because that
+    /// is the only place both are in hand.
+    pub fn read(buf: &[u8]) -> Result<Self> {
+        let raw = buf
+            .get(..SLOT_LEN)
+            .ok_or_else(|| Diag::new(Code::SnapshotCorrupt, "operand slot truncated"))?;
+        let tag = Tag::from_byte(raw[0]).ok_or_else(|| {
+            Diag::new(Code::SnapshotCorrupt, format!("unassigned value tag {}", raw[0]))
+        })?;
+        let payload = u64::from_le_bytes(raw[8..16].try_into().expect("slice is 8 bytes"));
+        Ok(Self { tag, payload })
+    }
+}
+
+impl fmt::Debug for Value {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        match self.tag {
+            Tag::Void => f.write_str("void"),
+            Tag::Int => write!(f, "{}", self.payload as i64),
+            Tag::Pending => write!(f, "pending{:?}", EffectId(self.payload)),
+            t => write!(f, "{}{:?}", t.name(), self.handle_unchecked()),
+        }
+    }
+}
+
+impl Default for Value {
+    fn default() -> Self {
+        Self::VOID
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn slot_layout_is_the_wire_format() {
+        assert_eq!(core::mem::size_of::<Value>(), SLOT_LEN);
+        let mut buf = Vec::new();
+        Value::int(-42).write(&mut buf);
+        assert_eq!(buf.len(), SLOT_LEN);
+        assert_eq!(Value::read(&buf).unwrap().as_int().unwrap(), -42);
+    }
+
+    #[test]
+    fn handles_roundtrip_through_payload_bits() {
+        for h in [Handle::EMPTY, Handle::new(0, 12), Handle::new(u32::MAX, 1)] {
+            assert_eq!(Handle::from_bits(h.to_bits()), h);
+            let v = Value::str(h);
+            assert_eq!(v.as_handle().unwrap(), h);
+        }
+    }
+
+    #[test]
+    fn handle_end_saturates_rather_than_wrapping() {
+        assert_eq!(Handle::new(u32::MAX, 8).end(), u32::MAX);
+        assert_eq!(Handle::new(4, 8).end(), 12);
+    }
+
+    #[test]
+    fn tag_mismatch_names_both_types() {
+        let e = Value::int(1).as_pending().unwrap_err();
+        assert_eq!(e.code, Code::TagMismatch);
+        assert!(e.message.contains("pending"), "{}", e.message);
+        assert!(e.message.contains("int"), "{}", e.message);
+    }
+
+    #[test]
+    fn as_handle_of_refuses_a_different_arena_tag() {
+        let v = Value::str(Handle::new(8, 4));
+        assert!(v.as_handle_of(Tag::Str).is_ok());
+        assert!(v.as_handle_of(Tag::Bytes).is_err());
+        assert!(v.as_handle().is_ok(), "as_handle is tag-agnostic by design");
+    }
+
+    #[test]
+    fn truthiness_matches_the_brz_contract() {
+        assert!(!Value::VOID.is_truthy());
+        assert!(!Value::int(0).is_truthy());
+        assert!(Value::int(-1).is_truthy());
+        assert!(!Value::str(Handle::EMPTY).is_truthy());
+        assert!(Value::str(Handle::new(0, 3)).is_truthy());
+        assert!(Value::pending(EffectId(0)).is_truthy());
+    }
+
+    #[test]
+    fn every_tag_maps_to_a_lattice_element() {
+        for b in 0..=5u8 {
+            let t = Tag::from_byte(b).expect("assigned tag");
+            assert_eq!(t as u8, b, "tag numbering is the wire format");
+            assert_ne!(t.ty(), Ty::Top, "no tag may map to the error element");
+        }
+        assert!(Tag::from_byte(6).is_none());
+    }
+
+    #[test]
+    fn reading_an_unassigned_tag_is_corruption_not_a_panic() {
+        let mut buf = vec![0u8; SLOT_LEN];
+        buf[0] = 200;
+        assert_eq!(Value::read(&buf).unwrap_err().code, Code::SnapshotCorrupt);
+        assert_eq!(Value::read(&buf[..4]).unwrap_err().code, Code::SnapshotCorrupt);
+    }
+}
