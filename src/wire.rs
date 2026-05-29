@@ -53,3 +53,64 @@ pub fn encode(m: &Message) -> Vec<u8> {
 /// Decode one frame; returns `None` when the buffer holds an incomplete
 /// message.
 pub fn decode(buf: &[u8]) -> Result<Option<(Message, usize)>> {
+    if buf.len() < 4 {
+        return Ok(None);
+    }
+    let len = u32::from_le_bytes(buf[..4].try_into().expect("4 bytes")) as usize;
+    if buf.len() < 4 + len {
+        return Ok(None);
+    }
+    let body = &buf[4..4 + len];
+    if body.first() != Some(&WIRE_VERSION) {
+        return Err(Diag::new(Code::RecordMalformed, "wire version mismatch"));
+    }
+    let kind = body[1];
+    let msg = match kind {
+        0 => {
+            let n = u32::from_le_bytes(body[2..6].try_into().expect("4 bytes")) as usize;
+            let name = String::from_utf8(body[6..6 + n].to_vec())
+                .map_err(|_| Diag::new(Code::RecordMalformed, "hello name not UTF-8"))?;
+            Message::Hello(name)
+        }
+        1 => {
+            let seq = u64::from_le_bytes(body[2..10].try_into().expect("8 bytes"));
+            Message::Trap(seq, body[10])
+        }
+        2 => {
+            let seq = u64::from_le_bytes(body[2..10].try_into().expect("8 bytes"));
+            let n = u32::from_le_bytes(body[10..14].try_into().expect("4 bytes")) as usize;
+            Message::Answer(seq, body[14..14 + n].to_vec())
+        }
+        3 => Message::Snapshot,
+        4 => Message::Shutdown,
+        _ => return Err(Diag::new(Code::RecordMalformed, format!("unknown wire kind {kind}"))),
+    };
+    Ok(Some((msg, 4 + len)))
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn roundtrips_all_message_kinds() {
+        for m in [
+            Message::Hello("img".into()),
+            Message::Trap(3, 1),
+            Message::Answer(3, vec![1, 2, 3]),
+            Message::Snapshot,
+            Message::Shutdown,
+        ] {
+            let bytes = encode(&m);
+            let (decoded, used) = decode(&bytes).unwrap().expect("complete frame");
+            assert_eq!(decoded, m);
+            assert_eq!(used, bytes.len());
+        }
+    }
+
+    #[test]
+    fn partial_frames_report_none() {
+        let bytes = encode(&Message::Hello("x".into()));
+        assert!(decode(&bytes[..3]).unwrap().is_none());
+    }
+}
