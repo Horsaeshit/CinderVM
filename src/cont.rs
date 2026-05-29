@@ -76,3 +76,63 @@ pub fn restore(vm: &mut Vm, bytes: &[u8]) -> Result<()> {
         if sp > slots.len() {
             return Err(Diag::new(Code::SnapshotCorrupt, "stack pointer exceeds slots"));
         }
+        frames.push(Frame { func, pc, slots, sp, maxstack, returns });
+    }
+    vm.restore_frames(frames);
+    Ok(())
+}
+
+struct Cursor<'a> {
+    data: &'a [u8],
+    pos: usize,
+}
+
+impl<'a> Cursor<'a> {
+    fn new(data: &'a [u8]) -> Self {
+        Self { data, pos: 0 }
+    }
+
+    fn take(&mut self, n: usize) -> Result<&'a [u8]> {
+        let end = self.pos + n;
+        if end > self.data.len() {
+            return Err(Diag::new(Code::SnapshotCorrupt, "snapshot truncated"));
+        }
+        let out = &self.data[self.pos..end];
+        self.pos = end;
+        Ok(out)
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::asm::assemble;
+    use crate::verify::admit;
+
+    #[test]
+    fn snapshot_restore_roundtrips_a_running_machine() {
+        let img = admit(assemble(
+            "t.cdx",
+            ".fn main() -> i32\n.maxstack 3\nmain:\n    ldi 4\n    ldi 5\n    add\n    halt\n",
+        ).unwrap())
+        .unwrap();
+        let mut vm = Vm::new(&img, crate::interp::Limits::default());
+        // two steps: ldi 4, ldi 5
+        vm.step(None).unwrap();
+        vm.step(None).unwrap();
+        let snap = snapshot(&vm).unwrap();
+        let mut vm2 = Vm::new(&img, crate::interp::Limits::default());
+        restore(&mut vm2, &snap).unwrap();
+        match vm2.step(None).unwrap() {
+            crate::trap::Step::Halted(code) => assert_eq!(code, 9),
+            other => panic!("expected halt, got {other:?}"),
+        }
+    }
+
+    #[test]
+    fn bad_magic_is_rejected() {
+        let img = admit(assemble("t.cdx", ".fn main() -> i32\n.maxstack 1\nmain:\n    ldi 0\n    halt\n").unwrap()).unwrap();
+        let mut vm = Vm::new(&img, crate::interp::Limits::default());
+        assert_eq!(restore(&mut vm, b"XXXX").unwrap_err().code, Code::SnapshotCorrupt);
+    }
+}
