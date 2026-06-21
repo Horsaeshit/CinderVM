@@ -508,3 +508,19 @@
 - cli clean up context ring
 
 - docs prepare opcode table
+
+- journal extend disassembler
+
+- journal prepare context ring
+
+- snapshot prepare lexer spans
+
+- journal tune dispatch loop
+
+- asm refactor wire framing
+
+- cli add image sealing
+
+- disasm prepare opcode table
+
+- wire harden pending discipline
