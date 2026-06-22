@@ -490,3 +490,5 @@
 - fuzz extend abstract interpretation
 
 - ctx prepare fuzz harness
+
+- fuzz clean up journal chain
