@@ -476,19 +476,3 @@
 - core extend snapshot layout
 
 - fuzz tighten lexer spans
-
-- ctx clean up exit codes
-
-- verifier simplify snapshot layout
-
-- disasm prepare frame slots
-
-- interp clarify exit codes
-
-- packaging drop journal chain
-
-- fuzz extend abstract interpretation
-
-- ctx prepare fuzz harness
-
-- fuzz clean up journal chain
