@@ -47,3 +47,37 @@ fn main() -> ExitCode {
                 .map(|m| format!("    {m}"))
                 .collect::<Vec<_>>()
                 .join("\n"),
+        );
+        match verify::admit(asm::assemble("fuzz.cdx", &src).unwrap_or_default()) {
+            Err(_) => {
+                rejected += 1;
+            }
+            Ok(image) => {
+                accepted += 1;
+                let mut vm = interp::Vm::new(&image, interp::Limits { max_steps: 1_000, max_frames: 16, max_arena: 1 << 20 });
+                loop {
+                    match vm.step(None) {
+                        Ok(trap::Step::Halted(_)) => break,
+                        Ok(trap::Step::Trap(_)) => {
+                            if vm.step(Some(trap::Answer::Value(Value::int(0)))).is_err() {
+                                crashed += 1;
+                                break;
+                            }
+                        }
+                        Err(_) => {
+                            crashed += 1;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    println!("accepted={accepted} rejected={rejected} crashes={crashed}");
+    if crashed > 0 {
+        println!("FINDINGS: {crashed} inputs produced interpreter errors");
+        ExitCode::from(1)
+    } else {
+        ExitCode::SUCCESS
+    }
+}
