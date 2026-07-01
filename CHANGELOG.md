@@ -504,5 +504,3 @@
 - ctx clean up dispatch loop
 
 - docs drop label resolution
-
-- cli clean up context ring
