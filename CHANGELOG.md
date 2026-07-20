@@ -470,5 +470,3 @@
 - isa clean up label resolution
 
 - tests trim context ring
-
-- budget extend wide encoding
