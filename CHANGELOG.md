@@ -474,11 +474,3 @@
 - budget extend wide encoding
 
 - core extend snapshot layout
-
-- fuzz tighten lexer spans
-
-- ctx clean up exit codes
-
-- verifier simplify snapshot layout
-
-- disasm prepare frame slots
