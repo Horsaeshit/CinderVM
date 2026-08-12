@@ -399,3 +399,293 @@ step : (Image, State, Answer?) -> (State, Trap?)
 Nothing else reaches it. Time, randomness, tool results, spawned-child results,
 and even the iteration order of `SELECT` are answers delivered by the host and
 recorded in the journal. `NOW` and `RAND` are instructions that trap.
+
+The journal is append-only and hash-chained — record *n* commits to
+`blake3(prev_hash ‖ payload)` — so a truncated or edited journal is detectable
+rather than silently divergent. Records are sealed *before* the answer reaches
+the interpreter, which is the ordering that makes crash recovery correct: a crash
+between "effect performed" and "answer recorded" is recoverable because the
+record was written first and marked `in-flight`, and recovery reconciles by
+querying the broker for that record's idempotency key.
+
+```
+┌───── record 41 ────┐ ┌───── record 42 ────┐ ┌───── record 43 ────┐
+│ prev  a19f…        │ │ prev  7c02…        │ │ prev  e5b1…        │
+│ kind  tool.issue   │ │ kind  tool.answer  │ │ kind  now          │
+│ key   idem:9f3a…   │ │ ref   41           │ │ value 1756...      │
+│ hash  7c02…        │ │ hash  e5b1…        │ │ hash  3d84…        │
+└────────────────────┘ └────────────────────┘ └────────────────────┘
+```
+
+This gives three things that are usually mutually exclusive:
+
+| | How |
+|---|---|
+| **Exact replay** | Same image + same journal ⇒ identical state at every step. Enforced, not hoped for: `--verify-replay` re-hashes state at each record and compares. |
+| **Time travel** | `replay --seek N` restores the nearest checkpoint ≤ N and steps forward. Backward stepping is forward stepping from an earlier snapshot; there is no undo log. |
+| **Divergence as a first-class error** | If the interpreter asks for something the journal does not have next, that is `E_DIVERGE` with the record index, the expected kind, and the requested kind. It means the image changed or the VM has a bug — the two things you actually want to know. |
+
+```sh
+$ cinder replay run.jl --verify-replay
+  replaying 5 records against triage.cdxb (6f2a…c1)
+  ✓ 5/5 states match recorded digests
+  ✓ journal chain intact  (head 3d84…)
+```
+
+---
+
+## The supervisor
+
+Written in Go, in [`cmd/cinderd`](cmd/cinderd/) and [`internal/`](internal/). The
+split is not decorative: the VM wants a single-threaded, allocation-frugal,
+panic-free core, while the supervisor wants goroutines, `context` cancellation,
+and an HTTP surface. They meet over a length-prefixed frame protocol on a pipe or
+UDS ([docs/protocol.md](docs/protocol.md)), so a compromised or crashing tool
+cannot take a VM's address space with it.
+
+```
+                     ┌────────────────────────────────────────┐
+   HTTP / gRPC       │            cinderd                     │
+  ───────────────►   │                                        │
+                     │  ┌──────────┐   admission + fair queue │
+                     │  │ scheduler│   weighted by tenant     │
+                     │  └────┬─────┘                          │
+                     │       │ lease                          │
+                     │  ┌────▼─────┐   ┌──────────┐           │
+                     │  │  broker  │──►│  ledger  │  quotas   │
+                     │  └────┬─────┘   └──────────┘           │
+                     └───────┼────────────────────────────────┘
+                             │ frames (UDS)
+                ┌────────────┼────────────┬────────────┐
+                ▼            ▼            ▼            ▼
+             vm #1        vm #2        vm #3        vm #4      (separate procs)
+```
+
+Responsibilities, in the order they matter:
+
+- **Scheduler.** VMs are cooperatively descheduled at `AWAIT`/`YIELD_CTX`. A
+  suspended VM costs a snapshot, not a thread, so the concurrency ceiling is
+  memory, not goroutines. Fair queueing is deficit round-robin over tenants with
+  weights; a single tenant cannot starve others by spawning.
+- **Syscall broker.** Owns tool dispatch, retries with jittered backoff,
+  idempotency keys, and per-tool circuit breakers. Every dispatch is journalled
+  before it leaves and reconciled on return.
+- **Ledger.** Two-phase budget. `RESERVE` takes an optimistic lease against the
+  tenant's remaining allowance; `SPEND` settles it with the real usage;
+  `RELEASE` returns unused reservation. Overspend is refused at reserve time, so
+  a run cannot exceed its budget and then apologize.
+- **Recovery.** On startup, scans the snapshot store for runs whose lease
+  expired, reconciles their in-flight journal records against the broker, and
+  reschedules from the last checkpoint.
+
+> [!NOTE]
+> `cinderd` binds `127.0.0.1:7749` with **no authentication by default** — it is
+> built for a trusted network boundary with the real gateway in front. Before
+> exposing it, read [docs/deployment.md](docs/deployment.md#authentication) and
+> set `CINDERD_AUTH`. The `/debug/vm` endpoint exposes full machine state,
+> including tool arguments, and must not be reachable from outside the host.
+
+---
+
+## Performance
+
+`cargo bench` on the committed corpus; 12-core Zen 4, Linux 6.11, `--release`.
+Numbers are p50 with p99 in parentheses. Reproduce with
+`cargo bench -- --save-baseline main` — [docs/benchmarks.md](docs/benchmarks.md)
+covers the methodology and the outlier handling.
+
+| Operation | Result | Notes |
+|---|---|---|
+| Dispatch, arithmetic-heavy loop | **41 M insn/s** (38 M) | Computed-goto-shaped `match`; the bottleneck is the store to `sp`. |
+| Dispatch, effect-heavy | 9.1 M insn/s | Trap construction dominates. |
+| Verify, 4 KiB image | **1.9 ms** (2.4 ms) | Fixpoint converges in ≤3 passes on all corpus images. |
+| Snapshot, 64 KiB arena | **112 µs** (140 µs) | Two memcpys and a hash; hash is 70% of it. |
+| Restore + validate | 138 µs (171 µs) | Validation is 60% — deliberately not optional. |
+| `FORK`, 1 MiB arena | **8 µs** | COW; independent of arena size until first write. |
+| Journal append, fsync | 1.1 ms | Group-committed; 84 µs at batch 16. |
+| Suspended VM, resident | **2.3 KiB** | vs. ~8 KiB for a parked goroutine, ~40 KiB for a Python task. |
+
+The interpreter's inner loop is the one place in the codebase where clarity was
+traded for speed, and it is commented accordingly. Everything else is written to
+be read.
+
+---
+
+## Building from source
+
+Requires Rust ≥ 1.78 (pinned in [`rust-toolchain.toml`](rust-toolchain.toml)) and
+Go ≥ 1.22. No C toolchain, no system libraries, no build scripts — the Rust crate
+has **zero dependencies** outside `core`/`alloc`/`std`, including the hash, the
+arena, and the CLI argument parsing.
+
+```sh
+git clone https://github.com/ashish/cindervm && cd cindervm
+
+make            # debug build of both halves
+make release    # LTO, single codegen unit, symbols stripped
+make test       # unit + corpus conformance + Go tests + cross-language e2e
+make verify     # clippy -D warnings, rustfmt, go vet, staticcheck
+make bench      # criterion, baseline-compared
+make fuzz T=60  # 60s of bytecode fuzzing against the verifier/interpreter pair
+```
+
+Individually:
+
+```sh
+cargo build --release --workspace
+cargo test  --all-features
+cargo clippy --all-targets -- -D warnings
+go build ./cmd/...
+go test  ./... -race
+```
+
+The [Makefile](Makefile) is the source of truth for what CI runs; the
+[workflow](.github/workflows/ci.yml) calls the same targets so a green local
+`make verify && make test` means a green CI. The matrix covers
+`{linux, macos, windows} × {stable, 1.78, nightly}`, with nightly allowed to fail
+and Miri run on the arena and continuation modules only (they are where aliasing
+mistakes would hide, even under `#![deny(unsafe_code)]` — `Miri` also catches UB
+in the standard library calls we make).
+
+<details>
+<summary><b>Cross-compiling for the supervisor's target</b></summary>
+
+The VM binary is the only thing that needs to match the tool-execution host.
+Static musl builds are the intended deployment:
+
+```sh
+rustup target add x86_64-unknown-linux-musl
+cargo build --release --target x86_64-unknown-linux-musl --bin cinder
+CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -trimpath -ldflags='-s -w' ./cmd/cinderd
+```
+
+Both artifacts are then self-contained; the container is `FROM scratch` plus the
+two binaries. See [docs/deployment.md](docs/deployment.md).
+</details>
+
+<details>
+<summary><b>Regenerating the ISA tables and docs</b></summary>
+
+[`src/isa.rs`](src/isa.rs) is the single definition of the instruction set — the
+opcode table, operand shapes, stack effects, and type rules all live in one
+`const` array. The assembler's mnemonic table, the disassembler, the verifier's
+transfer functions, and [docs/isa.md](docs/isa.md) are all derived from it:
+
+```sh
+cargo run --bin cinderc -- --emit-isa-md > docs/isa.md
+cargo test  isa::table_is_dense   # every opcode 0..N accounted for, no gaps
+```
+
+`make verify` fails if the checked-in `docs/isa.md` differs from the generated
+one, so the reference cannot drift from the implementation.
+</details>
+
+---
+
+## Repository layout
+
+The Rust core is deliberately flat. Modules are large because the boundaries
+follow the machine's structure, not a file-size preference.
+
+```
+cindervm/
+├── src/
+│   ├── lib.rs             crate root, invariant docs, #![deny(unsafe_code)]
+│   ├── isa.rs             opcode table, encoding, stack effects, type rules
+│   ├── value.rs           tagged 16-byte Value, arena handles, coercions
+│   ├── lex.rs             .cdx tokenizer with span tracking
+│   ├── asm.rs             parser, symbol resolution, fixups, encoder
+│   ├── image.rs           .cdxb container: sections, header, sealing
+│   ├── verify.rs          abstract interpreter, type lattice, CFG fixpoint
+│   ├── cfg.rs             basic blocks, dominators, loop headers
+│   ├── interp.rs          the dispatch loop and instruction semantics
+│   ├── frame.rs           call frames, operand stack windows
+│   ├── heap.rs            bump arena, COW pages, handle validation
+│   ├── cont.rs            snapshot / restore, relocation, validation
+│   ├── journal.rs         hash-chained record log, cursor, reconciliation
+│   ├── replay.rs          journal-backed host, divergence detection
+│   ├── budget.rs          two-phase reservation ledger
+│   ├── ctx.rs             context ring, windowing, token accounting
+│   ├── trap.rs            the interpreter↔host boundary type
+│   ├── wire.rs            frame protocol codec
+│   ├── diag.rs            spans, error codes, rendered diagnostics
+│   ├── disas.rs           disassembler and the `cinder dis` output
+│   └── bin/
+│       ├── cinderc.rs     assembler CLI
+│       ├── cinder.rs      run / replay / snap / dis
+│       └── cinder_fuzz.rs mutation fuzzer
+├── cmd/cinderd/           supervisor entrypoint
+├── internal/
+│   ├── sched/             deficit round-robin, leases
+│   ├── broker/            tool dispatch, retries, circuit breakers
+│   ├── ledger/            tenant quotas
+│   └── wire/              Go side of the frame protocol
+├── corpus/                310 conformance images with expected outcomes
+├── examples/              runnable .cdx agents
+├── docs/                  isa, protocol, determinism, deployment, benchmarks
+└── tests/                 integration + cross-language end-to-end
+```
+
+Every module is documented at the top with what it guarantees and what it assumes
+the caller has already proven. [docs/architecture.md](docs/architecture.md) is
+the long form.
+
+---
+
+## Stability
+
+`0.x`. The library API is not stable. Two things are:
+
+- **The `.cdxb` container** is versioned and will be read by future minor
+  versions. Images do not need recompilation.
+- **The journal format** is append-only and forward-compatible; a journal written
+  by `0.4` replays on `0.5`.
+
+The ISA itself is versioned separately (`cdx/4`). Adding opcodes bumps the minor;
+changing the meaning of one bumps the ISA version and images declare which they
+target. `CHANGELOG.md` tracks both.
+
+---
+
+## FAQ
+
+**Why not just use a durable execution framework?**
+They recover by re-executing and short-circuiting from a log, which requires your
+code to be deterministic and punishes you subtly when it isn't. `cindervm`
+restores state rather than re-deriving it, and makes non-determinism impossible
+at the ISA level instead of asking you to be careful.
+
+**Is `.cdx` meant to be written by hand?**
+For tests and examples, yes. In practice you generate it — the assembler is a
+library, and `asm::Builder` is the intended interface for a higher-level frontend.
+Writing one is the obvious next project and deliberately out of scope here.
+
+**Why is the interpreter single-threaded?**
+Because `SPAWN` creates a VM, not a thread. Parallelism belongs to the
+supervisor, which can place VMs across processes and machines. A multi-threaded
+interpreter would make state non-serializable, which is the one thing this design
+will not trade.
+
+**How does this handle streaming tool results?**
+`POLL` returns `pending` unchanged until the answer is complete; partial chunks
+are journalled as `tool.chunk` records and accumulate in the arena. Replay
+reproduces chunk boundaries exactly, which turns out to matter for reproducing
+bugs in streaming parsers.
+
+**Zero dependencies — really?**
+Really, for the core crate. blake3 is ~200 lines, the arena is ~400, arg parsing
+is ~150. The tradeoff is deliberate: this is a trust-boundary component, and every
+dependency is code you are also trusting. Dev-dependencies (criterion,
+proptest) are not so constrained.
+
+---
+
+## License
+
+Apache-2.0 OR MIT, at your option. See [LICENSE-APACHE](LICENSE-APACHE) and
+[LICENSE-MIT](LICENSE-MIT).
+
+<div align="center">
+<sub>Contributions welcome — read <a href="CONTRIBUTING.md">CONTRIBUTING.md</a> first; the corpus has rules.</sub>
+</div>
+
