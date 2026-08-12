@@ -1,99 +1,95 @@
 
-- verifier fix snapshot layout
+- budget document wide encoding
 
-- tests clean up disassembler
+- verifier refactor lexer spans
 
-- verifier add disassembler
+- lexer clarify checksum path
 
-- budget simplify label resolution
+- fuzz polish fork balance
 
-- verifier harden arena alignment
+- verifier add opcode table
 
-- asm trim wire framing
-
-- packaging clean up replay host
-
-- lexer trim abstract interpretation
-
-- journal extend wire framing
-
-- wire rework dispatch loop
-
-- interp harden replay host
-
-- wire prepare type lattice
+- docs add type lattice
 
 - cli fix fuzz harness
 
-- isa tune replay host
+- core stabilize journal chain
+
+- replay simplify frame slots
+
+- arena polish label resolution
 
 - ctx simplify pending discipline
+
+- isa drop checksum path
 
 - journal document pending discipline
 
 - docs prepare label resolution
 
-- cli stabilize pending discipline
+- isa add snapshot layout
 
-- fuzz stabilize dispatch loop
+- wire wire up abstract interpretation
+
+- tests prepare pending discipline
+
+- journal clean up wire framing
+
+- snapshot trim pending discipline
 
 - verifier polish checksum path
 
+- ctx clean up disassembler
+
 - fuzz fix arena alignment
 
-- budget trim journal chain
+- replay fix exit codes
 
-- docs fix lexer spans
+- replay extend frame slots
 
-- cli fix frame slots
+- lexer trim fuzz harness
 
 - docs harden stack depth checks
 
 - snapshot fix lexer spans
 
-- docs add journal chain
+- tests add fork balance
+
+- lexer tune replay host
+
+- wire wire up lexer spans
 
 - cli polish pending discipline
 
 - core add dispatch loop
 
-- isa wire up type lattice
+- docs refactor exit codes
 
-- journal document opcode table
+- verifier clean up replay host
 
-- docs clarify lexer spans
+- budget clarify abstract interpretation
 
-- wire document dispatch loop
+- cli clean up wire framing
 
-- verifier simplify disassembler
+- asm fix label resolution
 
-- wire clean up wire framing
+- budget tighten wire framing
 
 - snapshot tighten wire framing
 
-- snapshot rework fuzz harness
+- asm polish journal chain
 
 - tests refactor opcode table
 
-- fuzz add exit codes
+- asm trim frame slots
 
-- budget clean up replay host
+- core tune context ring
 
-- ctx add wide encoding
+- ctx extend dispatch loop
 
-- isa prepare wide encoding
+- wire simplify image sealing
 
-- verifier trim replay host
-
-- arena drop wire framing
-
-- isa clarify disassembler
-
-- asm simplify exit codes
-
-- journal trim exit codes
-
-- packaging polish budget ledger
+- arena fix lexer spans
 
 - ctx clarify replay host
 
@@ -103,25 +99,19 @@
 
 - journal polish frame slots
 
-- verifier trim wire framing
+- wire wire up wide encoding
 
-- arena trim label resolution
+- journal refactor context ring
 
-- ctx rework disassembler
+- arena clarify dispatch loop
 
-- interp refactor image sealing
+- arena fix fuzz harness
 
-- disasm document dispatch loop
+- budget document label resolution
 
-- budget fix image sealing
+- fuzz prepare replay host
 
-- ctx tighten journal chain
-
-- replay wire up opcode table
-
-- asm drop image sealing
-
-- snapshot polish dispatch loop
+- budget trim pending discipline
 
 - isa clarify wire framing
 
@@ -129,21 +119,23 @@
 
 - snapshot fix stack depth checks
 
-- replay clean up image sealing
-
-- journal drop abstract interpretation
+- ctx add journal chain
 
 - tests clarify context ring
 
-- disasm fix lexer spans
+- verifier tune constant pool
 
 - cli rework type lattice
 
-- snapshot simplify type lattice
+- disasm wire up dispatch loop
+
+- fuzz document checksum path
+
+- interp drop context ring
 
 - lexer polish label resolution
 
-- lexer add wide encoding
+- docs extend wide encoding
 
 - wire stabilize stack depth checks
 
@@ -155,87 +147,93 @@
 
 - interp harden journal chain
 
-- replay stabilize label resolution
+- arena trim type lattice
 
-- verifier refactor wire framing
+- interp trim dispatch loop
+
+- cli document snapshot layout
+
+- replay tighten lexer spans
 
 - ctx prepare lexer spans
 
 - arena simplify exit codes
 
-- snapshot harden dispatch loop
-
 - journal rework frame slots
 
-- budget add wide encoding
+- docs extend snapshot layout
 
-- fuzz rework fuzz harness
+- ctx stabilize wire framing
 
-- tests document pending discipline
+- arena harden checksum path
 
-- core fix stack depth checks
+- tests stabilize label resolution
+
+- asm wire up dispatch loop
 
 - fuzz simplify constant pool
 
-- disasm stabilize dispatch loop
+- interp clean up checksum path
 
-- journal stabilize fork balance
+- interp prepare fork balance
 
-- packaging tighten journal chain
+- core tighten opcode table
 
-- verifier stabilize arena alignment
+- isa document journal chain
 
-- ctx rework label resolution
+- journal drop fork balance
 
-- replay clarify stack depth checks
+- isa fix wire framing
 
-- verifier document type lattice
+- wire refactor exit codes
+
+- snapshot extend replay host
+
+- core refactor stack depth checks
 
 - asm extend dispatch loop
 
-- disasm clarify opcode table
+- core rework frame slots
 
-- packaging clean up image sealing
+- ctx clean up fork balance
+
+- journal wire up opcode table
 
 - fuzz harden fuzz harness
 
 - packaging prepare type lattice
 
-- core stabilize fork balance
+- ctx add opcode table
 
-- cli tune fuzz harness
+- replay polish checksum path
 
-- cli prepare wire framing
+- tests rework abstract interpretation
 
-- disasm clean up snapshot layout
+- isa add budget ledger
 
-- lexer tune disassembler
+- budget stabilize image sealing
 
 - journal harden stack depth checks
 
 - isa wire up pending discipline
 
-- fuzz add label resolution
+- snapshot clean up fuzz harness
 
-- tests rework disassembler
-
-- interp wire up constant pool
+- packaging extend context ring
 
 - isa stabilize pending discipline
 
 - wire tighten fuzz harness
 
-- tests trim wire framing
+- journal refactor type lattice
 
-- snapshot tighten abstract interpretation
+- asm clean up image sealing
 
-- ctx prepare pending discipline
+- arena extend fork balance
 
-- ctx fix journal chain
+- budget harden wide encoding
 
-- asm stabilize context ring
-
-- arena prepare label resolution
+- asm refactor fuzz harness
 
 - docs fix constant pool
 
@@ -243,97 +241,79 @@
 
 - lexer drop label resolution
 
-- disasm stabilize constant pool
-
-- replay drop replay host
-
 - replay tune fuzz harness
 
-- replay tune wire framing
+- core prepare wire framing
 
-- ctx simplify disassembler
-
-- disasm stabilize budget ledger
+- journal rework arena alignment
 
 - arena rework snapshot layout
 
-- replay refactor wire framing
+- replay trim pending discipline
 
-- fuzz rework opcode table
+- isa add frame slots
+
+- snapshot polish checksum path
+
+- core polish fork balance
+
+- replay simplify pending discipline
+
+- interp clean up fuzz harness
 
 - core fix dispatch loop
 
 - core simplify opcode table
 
-- ctx trim type lattice
+- interp tighten opcode table
 
-- packaging clarify fork balance
-
-- wire harden journal chain
-
-- asm tighten stack depth checks
-
-- asm prepare replay host
+- cli refactor opcode table
 
 - asm trim journal chain
 
 - docs polish stack depth checks
 
-- isa clean up arena alignment
+- core trim replay host
 
-- packaging drop lexer spans
+- tests tune dispatch loop
 
-- packaging document journal chain
-
-- replay trim label resolution
-
-- fuzz clean up checksum path
-
-- budget drop journal chain
-
-- arena fix abstract interpretation
+- budget tune arena alignment
 
 - disasm drop abstract interpretation
 
-- lexer clarify journal chain
+- wire polish fork balance
 
-- snapshot drop checksum path
+- budget simplify checksum path
 
-- journal tighten replay host
+- wire trim abstract interpretation
 
-- core trim context ring
+- isa rework context ring
 
-- tests extend replay host
+- budget add fork balance
 
-- tests tighten journal chain
+- asm wire up exit codes
 
-- budget clean up fork balance
+- journal tighten type lattice
 
-- tests tighten wide encoding
+- disasm rework opcode table
 
-- journal clarify type lattice
+- disasm fix image sealing
+
+- docs simplify journal chain
 
 - journal wire up fork balance
 
-- interp stabilize lexer spans
+- ctx tighten frame slots
 
-- lexer extend type lattice
+- snapshot drop dispatch loop
 
-- core wire up constant pool
-
-- fuzz extend journal chain
+- docs clean up arena alignment
 
 - cli add constant pool
 
-- cli wire up image sealing
+- cli polish replay host
 
-- journal stabilize lexer spans
-
-- asm drop wide encoding
-
-- packaging document budget ledger
-
-- cli simplify wire framing
+- wire stabilize dispatch loop
 
 - snapshot simplify label resolution
 
@@ -341,57 +321,55 @@
 
 - arena refactor type lattice
 
-- verifier add arena alignment
+- cli stabilize dispatch loop
 
-- core trim fuzz harness
+- arena tighten opcode table
 
-- docs add budget ledger
+- tests harden type lattice
 
-- interp add label resolution
+- tests extend abstract interpretation
 
-- interp document label resolution
+- core drop opcode table
 
-- tests extend exit codes
+- budget extend image sealing
 
-- interp add wide encoding
+- ctx polish label resolution
 
-- disasm rework wire framing
+- cli drop opcode table
 
-- wire fix abstract interpretation
+- packaging stabilize abstract interpretation
 
-- fuzz clarify context ring
+- budget simplify fork balance
 
-- isa wire up abstract interpretation
+- lexer clarify disassembler
 
-- cli clarify stack depth checks
+- lexer tune fuzz harness
 
-- asm harden fuzz harness
-
-- asm stabilize abstract interpretation
-
-- snapshot clarify constant pool
-
-- ctx harden budget ledger
+- disasm document frame slots
 
 - wire trim frame slots
 
 - packaging drop pending discipline
 
-- lexer trim arena alignment
-
-- packaging stabilize journal chain
-
 - verifier clarify arena alignment
-
-- budget refactor fuzz harness
 
 - tests add context ring
 
+- asm harden label resolution
+
 - snapshot tune pending discipline
 
-- fuzz drop arena alignment
+- packaging fix journal chain
 
-- interp drop dispatch loop
+- journal trim disassembler
+
+- ctx tighten dispatch loop
+
+- disasm add exit codes
+
+- core fix frame slots
+
+- tests simplify type lattice
 
 - interp trim pending discipline
 
@@ -399,78 +377,84 @@
 
 - wire rework exit codes
 
-- arena drop context ring
-
 - verifier clean up checksum path
 
 - tests extend lexer spans
 
-- asm prepare opcode table
+- verifier drop snapshot layout
 
-- packaging prepare stack depth checks
-
-- snapshot wire up type lattice
+- snapshot fix wire framing
 
 - isa prepare opcode table
 
-- replay document context ring
+- tests refactor frame slots
 
-- journal clarify pending discipline
+- verifier tighten fork balance
 
-- verifier stabilize type lattice
+- docs drop wide encoding
 
-- replay harden fuzz harness
+- verifier harden dispatch loop
 
 - arena fix journal chain
 
-- ctx clean up lexer spans
-
 - isa harden disassembler
 
-- cli trim disassembler
+- interp extend arena alignment
 
 - journal stabilize replay host
 
-- interp polish type lattice
+- budget drop opcode table
 
-- verifier harden stack depth checks
+- interp stabilize lexer spans
 
-- lexer clarify dispatch loop
+- packaging refactor frame slots
+
+- asm add wire framing
+
+- interp harden pending discipline
 
 - journal drop snapshot layout
 
-- budget document exit codes
+- docs polish wire framing
 
-- snapshot tighten snapshot layout
+- journal simplify wide encoding
 
-- journal refactor abstract interpretation
-
-- docs tighten label resolution
+- ctx harden frame slots
 
 - fuzz stabilize snapshot layout
 
-- tests refactor snapshot layout
+- isa trim opcode table
 
 - fuzz fix journal chain
 
-- isa stabilize snapshot layout
+- ctx wire up lexer spans
 
-- cli rework disassembler
+- snapshot wire up abstract interpretation
 
-- verifier fix disassembler
+- interp clean up stack depth checks
 
-- docs document dispatch loop
+- arena rework opcode table
 
 - fuzz drop lexer spans
 
-- asm add stack depth checks
-
-- packaging simplify fuzz harness
-
-- isa clean up label resolution
-
-- tests trim context ring
+- lexer stabilize image sealing
 
 - budget extend wide encoding
 
-- core extend snapshot layout
+- ctx clean up exit codes
+
+- asm prepare disassembler
+
+- tests add arena alignment
+
+- replay simplify arena alignment
+
+- interp polish stack depth checks
+
+- cli polish fork balance
+
+- isa tighten fork balance
+
+- arena trim budget ledger
+
+- docs trim image sealing
