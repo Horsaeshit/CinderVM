@@ -440,3 +440,7 @@ pub fn format_insn(image: &Image, pc: u32, d: Decoded) -> String;
 pub fn annotate(image: &Image, pc: u32) -> Option<String>;   // resolved operand
 ```
 Output resolves symbols: `ldc $sys ; "You triage..."`. Redact `env` values.
+
+## Replay divergence rules
+
+A replay diverges when the journal and the run disagree on a trap's answer. The failure is always detected at the boundary, never mid-dispatch: the host compares the journaled answer against the live answer and raises `E_DIVERGE` before the interpreter sees it. Sources of divergence are unlogged oracles, stale images, and hand-edited journals — the chain hash catches the last one at load time.
