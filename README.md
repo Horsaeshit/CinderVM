@@ -689,3 +689,11 @@ Apache-2.0 OR MIT, at your option. See [LICENSE-APACHE](LICENSE-APACHE) and
 <sub>Contributions welcome — read <a href="CONTRIBUTING.md">CONTRIBUTING.md</a> first; the corpus has rules.</sub>
 </div>
 
+
+## FAQ
+
+**What happens if the host dies mid-run?** The snapshot restores the machine state directly from the object store; effects issued before the snapshot are replayed from the journal, so nothing is re-executed. See `docs/internal-contract.md`.
+
+**Can two VMs share one journal?** No. A journal belongs to exactly one run; forks get their own chain so `E_DIVERGE` stays a meaningful signal.
+
+**Why is `unsafe` forbidden?** The tagged-value layout makes relocation arithmetic, not pointer patching. There is no code that needs `unsafe` today, and the lint keeps it that way.
